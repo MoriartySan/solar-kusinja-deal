@@ -24,6 +24,25 @@ export default {
 				ring: 'hsl(var(--ring))',
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
+				
+				/* Solar Brand Colors */
+				'solar-gold': {
+					DEFAULT: 'hsl(var(--solar-gold))',
+					light: 'hsl(var(--solar-gold-light))',
+					dark: 'hsl(var(--solar-gold-dark))'
+				},
+				'energy-green': {
+					DEFAULT: 'hsl(var(--energy-green))',
+					light: 'hsl(var(--energy-green-light))',
+					dark: 'hsl(var(--energy-green-dark))'
+				},
+				'earth-orange': {
+					DEFAULT: 'hsl(var(--earth-orange))',
+					light: 'hsl(var(--earth-orange-light))'
+				},
+				'malawi-red': 'hsl(var(--malawi-red))',
+				'trust-blue': 'hsl(var(--trust-blue))',
+				
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
 					foreground: 'hsl(var(--primary-foreground))'
@@ -62,6 +81,21 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				}
+			},
+			backgroundImage: {
+				'gradient-solar': 'var(--gradient-solar)',
+				'gradient-energy': 'var(--gradient-energy)',
+				'gradient-hero': 'var(--gradient-hero)',
+				'gradient-subtle': 'var(--gradient-subtle)'
+			},
+			boxShadow: {
+				'solar': 'var(--shadow-solar)',
+				'energy': 'var(--shadow-energy)',
+				'elegant': 'var(--shadow-elegant)'
+			},
+			transitionTimingFunction: {
+				'smooth': 'var(--transition-smooth)',
+				'bounce': 'var(--transition-bounce)'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
