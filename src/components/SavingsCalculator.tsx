@@ -52,32 +52,33 @@ const SavingsCalculator = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8">
+        <div className="grid lg:grid-cols-2 gap-6 lg:gap-8">
           {/* Calculator Input */}
           <Card className="shadow-elegant">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Calculator className="w-6 h-6 text-primary" />
+            <CardHeader className="pb-4">
+              <CardTitle className="flex items-center gap-2 text-lg md:text-xl">
+                <Calculator className="w-5 h-5 md:w-6 md:h-6 text-primary" />
                 Your Current Costs
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-6">
+            <CardContent className="space-y-4 md:space-y-6">
               <div className="space-y-2">
-                <Label htmlFor="fuel-cost">Monthly fuel cost (Kwacha)</Label>
+                <Label htmlFor="fuel-cost" className="text-sm md:text-base">Monthly fuel cost (Kwacha)</Label>
                 <Input
                   id="fuel-cost"
                   type="number"
                   value={monthlyFuelCost}
                   onChange={(e) => setMonthlyFuelCost(Number(e.target.value))}
                   placeholder="35000"
+                  className="h-11 md:h-12 text-base"
                 />
-                <p className="text-sm text-muted-foreground">
+                <p className="text-xs md:text-sm text-muted-foreground">
                   Include diesel, petrol, and maintenance costs
                 </p>
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="hours">Hours of generator use per day</Label>
+                <Label htmlFor="hours" className="text-sm md:text-base">Hours of generator use per day</Label>
                 <Input
                   id="hours"
                   type="number"
@@ -86,33 +87,39 @@ const SavingsCalculator = () => {
                   placeholder="4"
                   min="1"
                   max="24"
+                  className="h-11 md:h-12 text-base"
                 />
               </div>
 
               <div className="space-y-3">
-                <Label>Select solar package to compare</Label>
-                <div className="space-y-2">
+                <Label className="text-sm md:text-base">Select solar package to compare</Label>
+                <div className="space-y-3">
                   {Object.entries(packages).map(([key, pkg]) => (
                     <label 
                       key={key} 
-                      className="flex items-center space-x-3 cursor-pointer"
+                      className="flex items-start space-x-3 cursor-pointer p-3 rounded-lg border border-border hover:bg-muted/50 transition-colors"
                     >
                       <input
                         type="radio"
                         value={key}
                         checked={selectedPackage === key}
                         onChange={(e) => setSelectedPackage(e.target.value)}
-                        className="w-4 h-4 text-primary"
+                        className="w-4 h-4 text-primary mt-0.5 flex-shrink-0"
                       />
-                      <span className="text-sm">
-                        {pkg.name} - {formatCurrency(pkg.price)}
-                      </span>
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between w-full">
+                        <span className="text-sm md:text-base font-medium">
+                          {pkg.name}
+                        </span>
+                        <span className="text-sm md:text-base text-primary font-semibold mt-1 sm:mt-0">
+                          {formatCurrency(pkg.price)}
+                        </span>
+                      </div>
                     </label>
                   ))}
                 </div>
               </div>
 
-              <Button variant="solar" className="w-full">
+              <Button variant="solar" className="w-full h-11 md:h-12 text-base">
                 <TrendingUp className="w-4 h-4 mr-2" />
                 Update Calculations
               </Button>
@@ -121,26 +128,26 @@ const SavingsCalculator = () => {
 
           {/* Results */}
           <Card className="shadow-elegant">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Zap className="w-6 h-6 text-energy-green" />
+            <CardHeader className="pb-4">
+              <CardTitle className="flex items-center gap-2 text-lg md:text-xl">
+                <Zap className="w-5 h-5 md:w-6 md:h-6 text-energy-green" />
                 Your Solar Savings
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-6">
+            <CardContent className="space-y-4 md:space-y-6">
               {/* Current Costs vs Solar */}
-              <div className="grid grid-cols-2 gap-4">
-                <div className="text-center p-4 bg-malawi-red/10 rounded-lg">
-                  <Fuel className="w-8 h-8 mx-auto mb-2 text-malawi-red" />
-                  <div className="text-sm text-muted-foreground">Current Annual Cost</div>
-                  <div className="text-xl font-bold text-malawi-red">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
+                <div className="text-center p-3 md:p-4 bg-malawi-red/10 rounded-lg">
+                  <Fuel className="w-6 h-6 md:w-8 md:h-8 mx-auto mb-2 text-malawi-red" />
+                  <div className="text-xs md:text-sm text-muted-foreground">Current Annual Cost</div>
+                  <div className="text-lg md:text-xl font-bold text-malawi-red">
                     {formatCurrency(annualFuelCost)}
                   </div>
                 </div>
-                <div className="text-center p-4 bg-energy-green/10 rounded-lg">
-                  <Zap className="w-8 h-8 mx-auto mb-2 text-energy-green" />
-                  <div className="text-sm text-muted-foreground">Solar System Cost</div>
-                  <div className="text-xl font-bold text-energy-green">
+                <div className="text-center p-3 md:p-4 bg-energy-green/10 rounded-lg">
+                  <Zap className="w-6 h-6 md:w-8 md:h-8 mx-auto mb-2 text-energy-green" />
+                  <div className="text-xs md:text-sm text-muted-foreground">Solar System Cost</div>
+                  <div className="text-lg md:text-xl font-bold text-energy-green">
                     {formatCurrency(packagePrice)}
                   </div>
                 </div>
@@ -149,43 +156,43 @@ const SavingsCalculator = () => {
               <Separator />
 
               {/* Payback Period */}
-              <div className="text-center p-4 bg-primary/10 rounded-lg">
-                <div className="text-2xl font-bold text-primary">{paybackPeriod} months</div>
-                <div className="text-sm text-muted-foreground">Payback period</div>
-                <div className="text-xs text-muted-foreground mt-1">
+              <div className="text-center p-4 md:p-6 bg-primary/10 rounded-lg">
+                <div className="text-xl md:text-2xl font-bold text-primary">{paybackPeriod} months</div>
+                <div className="text-sm md:text-base text-muted-foreground">Payback period</div>
+                <div className="text-xs md:text-sm text-muted-foreground mt-1">
                   After this, your power is completely FREE!
                 </div>
               </div>
 
               {/* Long-term Savings */}
-              <div className="space-y-4">
-                <h4 className="font-semibold">Total Savings Over Time</h4>
+              <div className="space-y-3 md:space-y-4">
+                <h4 className="font-semibold text-sm md:text-base">Total Savings Over Time</h4>
                 
-                <div className="space-y-3">
+                <div className="space-y-2 md:space-y-3">
                   <div className="flex justify-between items-center p-3 bg-energy-green/5 rounded-lg">
-                    <span className="text-sm">5 years</span>
-                    <span className="font-bold text-energy-green">
+                    <span className="text-sm md:text-base">5 years</span>
+                    <span className="font-bold text-energy-green text-sm md:text-base">
                       {formatCurrency(fiveYearSavings)}
                     </span>
                   </div>
                   
                   <div className="flex justify-between items-center p-3 bg-energy-green/10 rounded-lg">
-                    <span className="text-sm">10 years</span>
-                    <span className="font-bold text-energy-green">
+                    <span className="text-sm md:text-base">10 years</span>
+                    <span className="font-bold text-energy-green text-sm md:text-base">
                       {formatCurrency(tenYearSavings)}
                     </span>
                   </div>
                   
                   <div className="flex justify-between items-center p-3 bg-energy-green/20 rounded-lg">
-                    <span className="text-sm">25 years (warranty period)</span>
-                    <span className="font-bold text-energy-green text-lg">
+                    <span className="text-sm md:text-base">25 years (warranty period)</span>
+                    <span className="font-bold text-energy-green text-base md:text-lg">
                       {formatCurrency(twentyFiveYearSavings)}
                     </span>
                   </div>
                 </div>
               </div>
 
-              <Button variant="hero" className="w-full">
+              <Button variant="hero" className="w-full h-11 md:h-12 text-base">
                 Join {packageName} Group
               </Button>
             </CardContent>
