@@ -30,11 +30,11 @@ const Header = () => {
             <a href="#calculator" className="text-muted-foreground hover:text-foreground transition-colors">
               Savings Calculator
             </a>
+            <a href="/financing" className="text-muted-foreground hover:text-foreground transition-colors">
+              Financing
+            </a>
             <a href="#testimonials" className="text-muted-foreground hover:text-foreground transition-colors">
               Customer Stories
-            </a>
-            <a href="#how-it-works" className="text-muted-foreground hover:text-foreground transition-colors">
-              How It Works
             </a>
           </nav>
 
@@ -80,18 +80,19 @@ const Header = () => {
                 Savings Calculator
               </a>
               <a 
+                href="/financing" 
+                className="block px-4 py-2 text-muted-foreground hover:text-foreground hover:bg-muted rounded-md transition-colors"
+                onClick={toggleMenu}
+              >
+                <Calculator className="w-4 h-4 inline mr-2" />
+                Financing
+              </a>
+              <a 
                 href="#testimonials" 
                 className="block px-4 py-2 text-muted-foreground hover:text-foreground hover:bg-muted rounded-md transition-colors"
                 onClick={toggleMenu}
               >
                 Customer Stories
-              </a>
-              <a 
-                href="#how-it-works" 
-                className="block px-4 py-2 text-muted-foreground hover:text-foreground hover:bg-muted rounded-md transition-colors"
-                onClick={toggleMenu}
-              >
-                How It Works
               </a>
               <div className="px-4 py-2 space-y-2">
                 <Button variant="outline" size="sm" className="w-full">
