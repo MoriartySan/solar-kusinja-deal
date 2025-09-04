@@ -1,11 +1,20 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Sun, Calculator, Users, Phone } from "lucide-react";
+import { Menu, X, Sun, Calculator, Users, Phone, LogOut, Settings } from "lucide-react";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, signOut } = useAuth();
+  const navigate = useNavigate();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+  const handleSignOut = async () => {
+    await signOut();
+    navigate("/");
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-border shadow-sm">
@@ -40,14 +49,41 @@ const Header = () => {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-3">
-            <Button variant="outline" size="sm">
-              <Phone className="w-4 h-4 mr-2" />
-              Contact
-            </Button>
-            <Button variant="solar" size="sm">
-              <Calculator className="w-4 h-4 mr-2" />
-              Calculate Savings
-            </Button>
+            {user ? (
+              <>
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={() => navigate("/installer-dashboard")}
+                >
+                  <Settings className="w-4 h-4 mr-2" />
+                  Dashboard
+                </Button>
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={handleSignOut}
+                >
+                  <LogOut className="w-4 h-4 mr-2" />
+                  Sign Out
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button variant="outline" size="sm">
+                  <Phone className="w-4 h-4 mr-2" />
+                  Contact
+                </Button>
+                <Button 
+                  variant="solar" 
+                  size="sm"
+                  onClick={() => navigate("/auth")}
+                >
+                  <Calculator className="w-4 h-4 mr-2" />
+                  Installer Login
+                </Button>
+              </>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -95,14 +131,53 @@ const Header = () => {
                 Customer Stories
               </a>
               <div className="px-4 py-2 space-y-2">
-                <Button variant="outline" size="sm" className="w-full">
-                  <Phone className="w-4 h-4 mr-2" />
-                  Contact Us
-                </Button>
-                <Button variant="solar" size="sm" className="w-full">
-                  <Calculator className="w-4 h-4 mr-2" />
-                  Calculate Savings
-                </Button>
+                {user ? (
+                  <>
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="w-full"
+                      onClick={() => {
+                        navigate("/installer-dashboard");
+                        toggleMenu();
+                      }}
+                    >
+                      <Settings className="w-4 h-4 mr-2" />
+                      Dashboard
+                    </Button>
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="w-full"
+                      onClick={() => {
+                        handleSignOut();
+                        toggleMenu();
+                      }}
+                    >
+                      <LogOut className="w-4 h-4 mr-2" />
+                      Sign Out
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <Button variant="outline" size="sm" className="w-full">
+                      <Phone className="w-4 h-4 mr-2" />
+                      Contact Us
+                    </Button>
+                    <Button 
+                      variant="solar" 
+                      size="sm" 
+                      className="w-full"
+                      onClick={() => {
+                        navigate("/auth");
+                        toggleMenu();
+                      }}
+                    >
+                      <Calculator className="w-4 h-4 mr-2" />
+                      Installer Login
+                    </Button>
+                  </>
+                )}
               </div>
             </nav>
           </div>
