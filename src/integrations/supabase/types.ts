@@ -14,6 +14,60 @@ export type Database = {
   }
   public: {
     Tables: {
+      jobs: {
+        Row: {
+          address: string
+          created_at: string
+          customer_email: string
+          customer_name: string
+          customer_phone: string | null
+          estimated_duration_hours: number | null
+          id: string
+          installer_id: string
+          notes: string | null
+          scheduled_date: string
+          scheduled_time: string
+          status: string
+          system_size: string
+          system_type: string
+          updated_at: string
+        }
+        Insert: {
+          address: string
+          created_at?: string
+          customer_email: string
+          customer_name: string
+          customer_phone?: string | null
+          estimated_duration_hours?: number | null
+          id?: string
+          installer_id: string
+          notes?: string | null
+          scheduled_date: string
+          scheduled_time: string
+          status?: string
+          system_size: string
+          system_type: string
+          updated_at?: string
+        }
+        Update: {
+          address?: string
+          created_at?: string
+          customer_email?: string
+          customer_name?: string
+          customer_phone?: string | null
+          estimated_duration_hours?: number | null
+          id?: string
+          installer_id?: string
+          notes?: string | null
+          scheduled_date?: string
+          scheduled_time?: string
+          status?: string
+          system_size?: string
+          system_type?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           certification_level: string | null
@@ -53,12 +107,53 @@ export type Database = {
         }
         Relationships: []
       }
+      ratings: {
+        Row: {
+          created_at: string
+          customer_email: string
+          id: string
+          installer_id: string
+          job_id: string
+          rating: number
+          review_text: string | null
+        }
+        Insert: {
+          created_at?: string
+          customer_email: string
+          id?: string
+          installer_id: string
+          job_id: string
+          rating: number
+          review_text?: string | null
+        }
+        Update: {
+          created_at?: string
+          customer_email?: string
+          id?: string
+          installer_id?: string
+          job_id?: string
+          rating?: number
+          review_text?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ratings_job_id_fkey"
+            columns: ["job_id"]
+            isOneToOne: false
+            referencedRelation: "jobs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_installer_average_rating: {
+        Args: { installer_user_id: string }
+        Returns: number
+      }
     }
     Enums: {
       [_ in never]: never
