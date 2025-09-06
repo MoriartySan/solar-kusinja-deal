@@ -7,6 +7,9 @@ import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import Financing from "./pages/Financing";
 import InstallerDashboard from "./pages/InstallerDashboard";
+import Checkout from "./pages/Checkout";
+import OrderConfirmation from "./pages/OrderConfirmation";
+import OrderTracking from "./pages/OrderTracking";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,6 +25,9 @@ const App = () => (
           <Route path="/auth" element={<Auth />} />
           <Route path="/financing" element={<Financing />} />
           <Route path="/installer-dashboard" element={<InstallerDashboard />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/order-confirmation" element={<OrderConfirmation />} />
+          <Route path="/order-tracking" element={<OrderTracking />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

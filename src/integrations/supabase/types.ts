@@ -68,6 +68,60 @@ export type Database = {
         }
         Relationships: []
       }
+      orders: {
+        Row: {
+          created_at: string
+          customer_address: string
+          customer_email: string
+          customer_name: string
+          customer_phone: string | null
+          estimated_delivery: string | null
+          estimated_install_date: string | null
+          id: string
+          installer_id: string | null
+          order_status: string
+          payment_status: string
+          product_name: string
+          product_price: number
+          stripe_session_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          customer_address: string
+          customer_email: string
+          customer_name: string
+          customer_phone?: string | null
+          estimated_delivery?: string | null
+          estimated_install_date?: string | null
+          id?: string
+          installer_id?: string | null
+          order_status?: string
+          payment_status?: string
+          product_name: string
+          product_price: number
+          stripe_session_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          customer_address?: string
+          customer_email?: string
+          customer_name?: string
+          customer_phone?: string | null
+          estimated_delivery?: string | null
+          estimated_install_date?: string | null
+          id?: string
+          installer_id?: string | null
+          order_status?: string
+          payment_status?: string
+          product_name?: string
+          product_price?: number
+          stripe_session_id?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           certification_level: string | null

@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -85,6 +86,7 @@ const packages: SolarPackage[] = [
 ];
 
 const ProductCatalogue = () => {
+  const navigate = useNavigate();
   const formatPrice = (price: number) => {
     return `K${(price / 1000000).toFixed(1)}M`;
   };
@@ -194,8 +196,14 @@ const ProductCatalogue = () => {
                     variant={pkg.popular ? "solar" : "energy"} 
                     className="w-full" 
                     size="lg"
+                    onClick={() => navigate("/checkout", { 
+                      state: { 
+                        productName: pkg.name, 
+                        productPrice: pkg.groupPrice / 1000000 // Convert to readable format
+                      }
+                    })}
                   >
-                    Join Group - {formatPrice(pkg.groupPrice)}
+                    Buy Now - {formatPrice(pkg.groupPrice)}
                   </Button>
                 </CardContent>
               </Card>

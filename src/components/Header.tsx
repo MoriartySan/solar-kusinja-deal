@@ -42,6 +42,9 @@ const Header = () => {
             <a href="/financing" className="text-muted-foreground hover:text-foreground transition-colors">
               Financing
             </a>
+            <a href="/order-tracking" className="text-muted-foreground hover:text-foreground transition-colors">
+              Track Order
+            </a>
             <a href="#testimonials" className="text-muted-foreground hover:text-foreground transition-colors">
               Customer Stories
             </a>
@@ -122,6 +125,14 @@ const Header = () => {
               >
                 <Calculator className="w-4 h-4 inline mr-2" />
                 Financing
+              </a>
+              <a 
+                href="/order-tracking" 
+                className="block px-4 py-2 text-muted-foreground hover:text-foreground hover:bg-muted rounded-md transition-colors"
+                onClick={toggleMenu}
+              >
+                <Calculator className="w-4 h-4 inline mr-2" />
+                Track Order
               </a>
               <a 
                 href="#testimonials" 
