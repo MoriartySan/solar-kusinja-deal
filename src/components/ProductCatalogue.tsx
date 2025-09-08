@@ -87,8 +87,24 @@ const packages: SolarPackage[] = [
 
 const ProductCatalogue = () => {
   const navigate = useNavigate();
+  
   const formatPrice = (price: number) => {
     return `K${(price / 1000000).toFixed(1)}M`;
+  };
+
+  const handlePurchase = (pkg: SolarPackage) => {
+    try {
+      navigate("/checkout", { 
+        state: { 
+          productName: pkg.name, 
+          productPrice: pkg.groupPrice / 1000000 // Convert to readable format
+        }
+      });
+    } catch (error) {
+      console.error("Navigation error:", error);
+      // Fallback: refresh page with route
+      window.location.href = "/checkout";
+    }
   };
 
   return (
@@ -196,12 +212,7 @@ const ProductCatalogue = () => {
                     variant={pkg.popular ? "solar" : "energy"} 
                     className="w-full" 
                     size="lg"
-                    onClick={() => navigate("/checkout", { 
-                      state: { 
-                        productName: pkg.name, 
-                        productPrice: pkg.groupPrice / 1000000 // Convert to readable format
-                      }
-                    })}
+                    onClick={() => handlePurchase(pkg)}
                   >
                     Buy Now - {formatPrice(pkg.groupPrice)}
                   </Button>
